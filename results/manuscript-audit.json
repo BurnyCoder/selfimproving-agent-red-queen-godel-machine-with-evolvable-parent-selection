@@ -1,0 +1,133 @@
+{
+  "source_sha256": "efa8e77721d6d41c5d9ea69aaab8f0c16664618876e2c9dfe897a3852bb242c9",
+  "cleaner_sha256": "177f4ac1c3c947822b6d8abbc3d0ea9cba608e5fc8b68e26a25aff3fd8fecda1",
+  "development": {
+    "train": {
+      "before": {
+        "accept": {
+          "n": 50,
+          "acknowledgments": 42,
+          "funding_language": 40,
+          "reviewer_thanks": 4,
+          "characters": {
+            "min": 43100,
+            "median": 82621.5,
+            "max": 199795
+          }
+        },
+        "reject": {
+          "n": 50,
+          "acknowledgments": 1,
+          "funding_language": 1,
+          "reviewer_thanks": 0,
+          "characters": {
+            "min": 21309,
+            "median": 48075.5,
+            "max": 125322
+          }
+        }
+      },
+      "after": {
+        "accept": {
+          "n": 50,
+          "acknowledgments": 0,
+          "funding_language": 10,
+          "reviewer_thanks": 0,
+          "characters": {
+            "min": 42867,
+            "median": 82265.5,
+            "max": 199038
+          }
+        },
+        "reject": {
+          "n": 50,
+          "acknowledgments": 0,
+          "funding_language": 1,
+          "reviewer_thanks": 0,
+          "characters": {
+            "min": 21309,
+            "median": 48075.5,
+            "max": 125322
+          }
+        }
+      }
+    },
+    "validation": {
+      "before": {
+        "accept": {
+          "n": 50,
+          "acknowledgments": 41,
+          "funding_language": 33,
+          "reviewer_thanks": 6,
+          "characters": {
+            "min": 34992,
+            "median": 78539.5,
+            "max": 185358
+          }
+        },
+        "reject": {
+          "n": 50,
+          "acknowledgments": 1,
+          "funding_language": 2,
+          "reviewer_thanks": 0,
+          "characters": {
+            "min": 9867,
+            "median": 46568.0,
+            "max": 101321
+          }
+        }
+      },
+      "after": {
+        "accept": {
+          "n": 50,
+          "acknowledgments": 0,
+          "funding_language": 2,
+          "reviewer_thanks": 0,
+          "characters": {
+            "min": 34992,
+            "median": 78277.5,
+            "max": 185023
+          }
+        },
+        "reject": {
+          "n": 50,
+          "acknowledgments": 0,
+          "funding_language": 2,
+          "reviewer_thanks": 0,
+          "characters": {
+            "min": 9867,
+            "median": 46568.0,
+            "max": 101321
+          }
+        }
+      }
+    }
+  },
+  "cross_split_id_overlap": 0,
+  "splits": {
+    "train": {
+      "count": 100,
+      "same_ids_order_labels": true,
+      "before": "c4c7dd3ed5375adc295c641f20cf981b11bf13f96b4e925eabc6ea5dd1dc3ea3",
+      "after": "80f814928403ccc7652ee47c865e2567a0250744815f8e34d2665b89b11127b8"
+    },
+    "validation": {
+      "count": 100,
+      "same_ids_order_labels": true,
+      "before": "79f6ed8ddae5a8ec33242dd36c3f6200a1d9fc6e6b3ff9aa6216cc25e530b412",
+      "after": "5e226850218ea1d9d762d3bcda5c3afcb120a09ce87d99a6a54fd466535ab2fb"
+    },
+    "test": {
+      "count": 100,
+      "same_ids_order_labels": true,
+      "before": "48c273c1a1275346966696106f1d93d69a566ad7a45e17ae176d854b280657a3",
+      "after": "8753b3ebae52434d0c338fb5ba69e51292198dd34942f2fec1e8a3afbe1653e8"
+    },
+    "pilot": {
+      "count": 24,
+      "same_ids_order_labels": true,
+      "before": "68ea167ec346cc23b876f1c0b76da795e6cdca3b8c3c37cb9d27625742bd4d17",
+      "after": "200e808dd1b8cc30d64233b5d7cf7528aa983cbbd182412c0bbfc9f382e49d89"
+    }
+  }
+}
