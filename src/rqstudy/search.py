@@ -9,7 +9,6 @@ from __future__ import annotations
 import time
 from copy import deepcopy
 from dataclasses import asdict
-from pathlib import Path
 
 import numpy as np
 from rqgm.config import RQGMConfig
@@ -114,7 +113,13 @@ class Study:
     def compute(self):
         local = self.domain.broker.metrics("search")
         return {
-            key: val + self.info["compute_prefix"].get(key, 0)
+            # The shared history counts toward the logical budget. Only new calls incur cost.
+            key: val
+            + (
+                self.info["compute_prefix"].get(key, 0)
+                if key in ("calls", "input", "output")
+                else 0
+            )
             for key, val in local.items()
         }
 

@@ -31,6 +31,8 @@ class Broker:
     """Record full prompts and streamed outputs once for each logical call and attempt."""
 
     def __init__(self, project: Path, run: str, ctx: int):
+        if os.getenv("RQGM_DISABLE_MODEL") == "1":
+            raise RuntimeError("Model access is disabled for this offline process")
         self.project, self.run, self.ctx = project, run, ctx
         host = os.getenv("OLLAMA_HOST", "http://127.0.0.1:11434")
         if urlparse(host).hostname not in ("127.0.0.1", "localhost", "::1"):
@@ -189,7 +191,7 @@ class Broker:
         return response["content"]
 
     def metrics(self, phase=None):
-        """Count unique logical events and actual GPU-resident service time separately."""
+        """Count successful broker events, memo hits, and Ollama request duration in seconds."""
         params = [self.run]
         where = "run=?"
         if phase:

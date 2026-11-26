@@ -4,7 +4,6 @@ from copy import deepcopy
 from types import SimpleNamespace
 import pytest
 from rqstudy.analysis import crossed_interval
-from rqstudy.data import load
 from rqstudy.endpoints import score
 from rqstudy.sandbox import Worker
 from rqstudy.search import Study

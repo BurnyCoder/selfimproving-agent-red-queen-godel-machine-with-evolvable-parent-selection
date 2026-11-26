@@ -280,6 +280,15 @@ def prepare(project: Path) -> dict:
         and load(freeze_path)["split_sha"] != manifest["splits"]["test"]["sha256"]
     ):
         raise ValueError("Prepared text differs from the frozen study")
+    current_path = project / "results/split-manifest.json"
+    if any(
+        any((project / "results" / kind).glob("*.json"))
+        for kind in ("runs", "evaluations")
+    ):
+        if not current_path.exists() or load(current_path) != manifest:
+            raise ValueError(
+                "Cannot change a manuscript panel after a recorded search or evaluation"
+            )
     registered_ids = [p["id"] for group in prepared.values() for p in group]
     if len(set(registered_ids)) != len(registered_ids):
         raise ValueError("An enrolled ID occurs more than once")
@@ -289,6 +298,7 @@ def prepare(project: Path) -> dict:
         project / "results" / "manuscript-audit.json",
         dict(
             source_sha256=DATA_HASH,
+            manifest_sha256=digest(canonical(manifest)),
             cleaner_sha256=digest(
                 Path(__file__).with_name("disclosures.py").read_text(encoding="utf-8")
             ),
