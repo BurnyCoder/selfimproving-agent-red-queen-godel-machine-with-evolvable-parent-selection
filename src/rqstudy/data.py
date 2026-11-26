@@ -16,6 +16,7 @@ import unicodedata
 import urllib.request
 from collections import Counter
 from pathlib import Path
+from .disclosures import development_counts, remove_disclosures
 
 REVISION = "59a68f672dfb92c74aeb7e61535d776fb36e172d"
 DATA_URL = f"https://raw.githubusercontent.com/facebookresearch/HyperAgents/{REVISION}/domains/paper_review/dataset.csv"
@@ -80,20 +81,30 @@ def read_split(project: Path, split: str):
     papers = load(project / ".private" / "data" / (split + ".json"))
     manifest = load(project / "results" / "split-manifest.json")["splits"][split]
     identity = [(p["id"], digest(p["text"]), p["label"]) for p in papers]
-    if digest(canonical(identity)) != manifest["sha256"]:
+    if (
+        digest(canonical(identity)) != manifest["sha256"]
+        or [p["id"] for p in papers] != manifest["ids"]
+        or len(papers) != manifest["count"]
+        or [digest(canonical(row)) for row in identity] != manifest["item_sha256"]
+    ):
         raise ValueError(f"{split} split fingerprint mismatch")
     for paper in papers:
         parsed = MANUSCRIPT.search(paper["text"])
-        if not parsed or tuple(s.strip() for s in parsed.groups()) != (
-            paper["title"],
-            paper["abstract"],
+        if (
+            paper["text_sha256"] != digest(paper["text"])
+            or not parsed
+            or tuple(s.strip() for s in parsed.groups())
+            != (
+                paper["title"],
+                paper["abstract"],
+            )
         ):
             raise ValueError("Writer inputs differ from the fingerprinted manuscript")
     return papers
 
 
-def clean(raw: str) -> str:
-    """Decode the released Python string representation before removing outcome cues."""
+def registered_text(raw: str) -> str:
+    """Reproduce the 20 November text for the original grouping and enrollment."""
     if raw.startswith(("'", '"')):
         try:
             raw = ast.literal_eval(raw)
@@ -103,6 +114,11 @@ def clean(raw: str) -> str:
     return LINK.sub(
         "", METALINE.sub("", BLIND_HEADER.sub("", STATUS.sub("", raw)))
     ).strip()
+
+
+def clean(raw: str) -> str:
+    """Apply the registered decoding followed by the frozen disclosure amendment."""
+    return remove_disclosures(registered_text(raw))
 
 
 def words(text: str) -> set[str]:
@@ -127,7 +143,7 @@ def unique_papers(rows):
         return index
 
     for row in rows:
-        body = clean(row["paper_text"])
+        body = registered_text(row["paper_text"])
         match = MANUSCRIPT.search(body)
         if not match or row["outcome"] not in {"accept", "reject"}:
             missing += 1
@@ -202,7 +218,12 @@ def prepare(project: Path) -> dict:
         )
         for label in ("accept", "reject")
     }
+    prior = load(project / "results" / "split-manifest.2026-11-20.json")
+    if prior["source_sha256"] != DATA_HASH or prior["audit"] != audit:
+        raise ValueError("Original enrollment population changed")
     manifest = dict(source=DATA_URL, source_sha256=DATA_HASH, audit=audit, splits={})
+    development = {}
+    prepared = {}
     offset = 0
     for name, count in SIZES.items():
         subset = sorted(
@@ -218,12 +239,82 @@ def prepare(project: Path) -> dict:
             "reject": count // 2,
         }:
             raise ValueError(f"Insufficient eligible data for {name}")
-        dump(private / f"{name}.json", subset)
         ident = [(p["id"], p["text_sha256"], p["label"]) for p in subset]
+        previous = prior["splits"][name]
+        ids = [p["id"] for p in subset]
+        if ids != previous["ids"] or digest(canonical(ident)) != previous["sha256"]:
+            raise ValueError(f"{name}: original IDs, labels, order or text changed")
+        cleaned = []
+        for paper in subset:
+            body = remove_disclosures(paper["text"])
+            parsed = MANUSCRIPT.search(body)
+            if not parsed:
+                raise ValueError(f"Unparseable amended manuscript in {name}")
+            title, abstract = (s.strip() for s in parsed.groups())
+            cleaned.append(
+                dict(
+                    paper,
+                    text=body,
+                    title=title,
+                    abstract=abstract,
+                    text_sha256=digest(body),
+                )
+            )
+        ident = [(p["id"], p["text_sha256"], p["label"]) for p in cleaned]
         manifest["splits"][name] = dict(
-            count=count, sha256=digest(canonical(ident)), ids=[p["id"] for p in subset]
+            count=count,
+            sha256=digest(canonical(ident)),
+            ids=ids,
+            item_sha256=[digest(canonical(row)) for row in ident],
         )
+        if name in ("train", "validation"):
+            development[name] = dict(
+                before=development_counts(subset), after=development_counts(cleaned)
+            )
+        prepared[name] = cleaned
         offset += count // 2
+    # Validate enrollment for every partition before replacing any existing split.
+    freeze_path = project / "results" / "freeze.json"
+    if (
+        freeze_path.exists()
+        and load(freeze_path)["split_sha"] != manifest["splits"]["test"]["sha256"]
+    ):
+        raise ValueError("Prepared text differs from the frozen study")
+    current_path = project / "results/split-manifest.json"
+    if any(
+        any((project / "results" / kind).glob("*.json"))
+        for kind in ("runs", "evaluations")
+    ):
+        if not current_path.exists() or load(current_path) != manifest:
+            raise ValueError(
+                "Cannot change a manuscript panel after a recorded search or evaluation"
+            )
+    registered_ids = [p["id"] for group in prepared.values() for p in group]
+    if len(set(registered_ids)) != len(registered_ids):
+        raise ValueError("An enrolled ID occurs more than once")
+    for name, papers in prepared.items():
+        dump(private / f"{name}.json", papers)
+    dump(
+        project / "results" / "manuscript-audit.json",
+        dict(
+            source_sha256=DATA_HASH,
+            manifest_sha256=digest(canonical(manifest)),
+            cleaner_sha256=digest(
+                Path(__file__).with_name("disclosures.py").read_text(encoding="utf-8")
+            ),
+            development=development,
+            cross_split_id_overlap=len(registered_ids) - len(set(registered_ids)),
+            splits={
+                s: dict(
+                    count=v["count"],
+                    same_ids_order_labels=True,
+                    before=prior["splits"][s]["sha256"],
+                    after=v["sha256"],
+                )
+                for s, v in manifest["splits"].items()
+            },
+        ),
+    )
     dump(project / "results" / "split-manifest.json", manifest)
     return manifest
 

@@ -25,7 +25,7 @@ from reportlab.platypus import (
 RQ = "https://arxiv.org/html/2606.26294v3#A2.SS4"
 HA = "https://arxiv.org/pdf/2603.19461v2#page=60"
 BASE = "https://github.com/DreamFallenFlowers/OpenRQGM/tree/feecb32d9fbdd1c60749ade9ecb47f971e12666e"
-G = "https://github.com/BurnyCoder/red-queen-godel-machine-with-evolvable-parent-selection"
+G = "https://github.com/BurnyCoder/selfimproving-agent-red-queen-godel-machine-with-evolvable-parent-selection"
 SRC = "https://github.com/facebookresearch/HyperAgents/blob/59a68f672dfb92c74aeb7e61535d776fb36e172d/utils/gl_utils.py#L571-L584"
 
 
@@ -34,7 +34,17 @@ def link(label, url):
 
 
 def make_paper(
-    project, status, scores, searches, contrasts, examples, computes, routes, runs
+    project,
+    status,
+    scores,
+    searches,
+    contrasts,
+    examples,
+    computes,
+    routes,
+    runs,
+    inputs,
+    independent,
 ):
     """Keep the preliminary protocol readable and insert outcomes only when observed."""
     rl_config.invariant = 1
@@ -118,7 +128,7 @@ def make_paper(
     )
     heading("Abstract")
     p(
-        "Can a system improve its paper reviewer by rewriting the rule for choosing which archived agent to edit? We use a frozen local Qwen3.5-4B to evolve writer, reviewer, meta-agent and selector programs. The primary comparison holds the validation budget fixed and pairs search seeds across editable and native clade Thompson selection. The outcome is agreement with historical conference decisions on sealed manuscripts. "
+        "Can letting an editor rewrite and execute the rule that chooses its next expansion parent improve historical-decision prediction? The registered study pairs editable and native clade Thompson searches at a common validation budget around frozen Qwen3.5-4B. The endpoint is accuracy on a balanced sample of released manuscripts. "
         + status
     )
     heading("Motivation and related work")
@@ -131,7 +141,7 @@ def make_paper(
     )
     heading("Method")
     p(
-        "Each expansion executes the newest valid selector against a snapshot. The selected parent supplies all four programs to its editor. The child enters the archive after validation. Native expansion pools successes and failures over descendants. All arms choose evaluation nodes from their own evidence, balance eligible roles and tasks, and collect lineage training feedback on first expansion. A reviewer election uses distinct human judgments and the lower fifth percentile of a Beta posterior. A new incumbent invalidates dependent writer scores. "
+        "In the editable arm the latest admitted program supplies the selector, with fallback on execution failure. Its chosen parent supplies the workspace to edit. The native arm fixes the selector and samples from subtree counts, including the node itself. Evaluation uses own-node counts and balances eligible roles and tasks. A fixed validation packet elects the incumbent. Endpoint ranking uses the fifth percentile of a Beta working posterior on distinct reviewer–paper observations. Replacing the incumbent removes dependent writer scores from active evidence. "
         + link("OpenRQGM base", BASE)
         + " · "
         + link(
@@ -177,7 +187,7 @@ def make_paper(
                     "Uniform / handcrafted",
                     "Secondary fixed controls evaluated on the same papers.",
                 ],
-                ["Root", "Unevolved reviewer, scored directly."],
+                ["Root", "Planned direct evaluation of the unevolved reviewer."],
                 [
                     "Midpoint fork",
                     "Seed-one editable state, continued with native parent choice.",
@@ -245,13 +255,61 @@ def make_paper(
                 )
     heading("Limitations and conclusions")
     p(
-        "Historical acceptance reflects decisions made by a conference. Interpretation is conditional on the public corpus, model, input cleaning, fixed-reader compression, constrained program interface and local search budget. Pretraining familiarity is unknown. An eight-paper election packet can give noisy rankings or ties. Agreement on that packet is development evidence. Per-route sealed results quantify a possible long-document confound. "
-        + link("Methodological review", G + "/blob/main/reports/reviews/methods.md")
+        "Historical acceptance is the target for this balanced released corpus. Submission-version provenance and pretraining familiarity are uncertain. A small reused election packet can give unstable rankings. Reading-route subgroup scores are descriptive because routing depends on manuscript length. The fixed-snapshot replay measures choice disagreement. The midpoint intervention measures one continuation. "
+        + link(
+            "Independent review",
+            G + "/blob/main/reports/reviews/independent-scientific-audit.md",
+        )
         + "."
     )
+    p(status)
+    story.append(PageBreak())
+    heading("Independent audit of manuscript inputs")
     p(
-        status
-        + " The study reports invalid edits, low turnover and negative effects as observed."
+        "A development-only audit identified acknowledgments headings associated with historical acceptance. "
+        "A dated amendment fixed the cleaning rules before applying them to pilot and test manuscripts. "
+        "The registered paper IDs, order and labels were retained. Counts below are manuscripts with at least one heading. "
+        + link(
+            "Input fingerprints and development evidence",
+            G + "/blob/main/results/manuscript-audit.json",
+        )
+        + "."
+    )
+    devrows = []
+    for split, counts in inputs["development"].items():
+        for label in ("accept", "reject"):
+            b, a = (counts[when][label] for when in ("before", "after"))
+            devrows.append(
+                [
+                    split,
+                    label,
+                    b["n"],
+                    b["acknowledgments"],
+                    a["acknowledgments"],
+                    f"{a['characters']['median']:,.1f}",
+                ]
+            )
+    tab(
+        ["Split", "Decision", "Papers", "Before", "After", "Median chars after"],
+        devrows,
+        [27, 24, 23, 23, 23, 42],
+    )
+    p(
+        "The length difference persists after cleaning. The association does not identify a mechanism used by any reviewer. "
+        + link("Leakage and target validity", "https://arxiv.org/abs/2207.07048")
+        + "."
+    )
+    heading("Statistical verification")
+    c = independent["numerical"]["seed_only_exact_coverage"]
+    p(
+        "A second implementation checks the registered interval by counting sampled row and column multiplicities. "
+        "With eight independent equiprobable positive or negative seed effects and identical effects across papers within a seed, "
+        f"exact enumeration gives {c['covered']}/{c['total']} coverage of the zero mean ({100 * c['fraction']:.2f}%) for the ideal percentile interval. "
+        "Coverage in the actual study is unknown. Complete primary pairs and a common frozen paper panel are prerequisites for the registered verdict. "
+        + link(
+            "Reproducible calculation", G + "/blob/main/results/scientific-audit.json"
+        )
+        + "."
     )
     if computes or routes or examples:
         story.append(PageBreak())
@@ -266,14 +324,14 @@ def make_paper(
                     "Logical output",
                     "Actual input",
                     "Actual output",
-                    "GPU svc h",
+                    "Service h",
                     "Failures",
                 ],
                 computes,
                 [43, 13, 15, 17, 17, 17, 17, 14, 12],
             )
             p(
-                "GPU service time sums actual Ollama request durations while the model resides on the GPU. Shared-prefix costs are included in fork comparisons. Logical totals include cache hits.",
+                "Service time sums successful uncached Ollama request durations including backend overhead. Forks include their shared prefix in logical tokens. Physical cost counts newly incurred requests.",
                 "small",
             )
         if routes:

@@ -1,13 +1,12 @@
 """Regression fixtures for the treatment, published formulas and data boundary."""
 
-import random
 from copy import deepcopy
 
 import numpy as np
 from rqgm.archive import Archive
 from rqgm.models import UtilityRecord, WorkspaceNode
 
-from rqstudy.data import clean, prepare
+from rqstudy.data import clean
 from rqstudy.policies import (
     archive_view,
     choose_parent,

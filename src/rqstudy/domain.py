@@ -59,7 +59,7 @@ class Domain:
         except (ValueError, TypeError):
             decision, evidence = None, ""
         return dict(
-            decision=decision if decision in {"accept", "reject"} else "invalid",
+            decision=decision if decision in ("accept", "reject") else "invalid",
             evidence=evidence,
             **route,
         )

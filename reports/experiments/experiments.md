@@ -1,6 +1,6 @@
 # Experiment index
 
-The sealed editable–native comparison is pending.
+The primary hypothesis is untested. No complete editable–native pair has been scored on the sealed manuscripts.
 
 No endpoint predictions have been recorded.
 

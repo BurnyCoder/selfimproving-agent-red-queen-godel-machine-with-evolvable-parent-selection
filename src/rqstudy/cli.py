@@ -12,6 +12,8 @@ from . import campaign as study
 from .data import prepare
 from .endpoints import freeze
 from .reporting import report
+from .audit import record_observation
+from .sources import verify_sources
 
 
 def main(argv=None):
@@ -20,6 +22,9 @@ def main(argv=None):
     commands = parser.add_subparsers(dest="action", required=True)
     for name in ("prepare", "preflight", "report", "selftest"):
         commands.add_parser(name)
+    audit = commands.add_parser("audit")
+    audit.add_argument("--record-observation", action="store_true")
+    audit.add_argument("--verify-sources", action="store_true")
     run = commands.add_parser("run")
     run.add_argument("--arm", choices=(*study.ARMS, "fork-native"), required=True)
     run.add_argument("--seed", type=int, required=True)
@@ -61,6 +66,12 @@ def main(argv=None):
         case "release":
             result = study.publish(project, args.message)
         case "report":
+            result = report(project)
+        case "audit":
+            if args.verify_sources:
+                verify_sources(project)
+            if args.record_observation:
+                record_observation(project)
             result = report(project)
         case "selftest":
             raise SystemExit(

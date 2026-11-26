@@ -1,0 +1,35 @@
+{
+  "numerical": {
+    "kind": "synthetic arithmetic check",
+    "draws": 10000,
+    "seed": 1701,
+    "paired_shape": [
+      8,
+      10
+    ],
+    "production": {
+      "mean_pp": -7.5,
+      "low": -31.25,
+      "high": 13.750000000000002
+    },
+    "independent": {
+      "mean_pp": -7.5,
+      "low": -31.25,
+      "high": 13.75
+    },
+    "seed_only_exact_coverage": {
+      "covered_positive_counts": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "covered": 238,
+      "total": 256,
+      "fraction": 0.9296875
+    }
+  },
+  "reproduced_study_contrasts": {},
+  "manuscript_evidence": "manuscript-audit.json"
+}

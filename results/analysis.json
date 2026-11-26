@@ -1,5 +1,68 @@
 {
   "scores": [],
   "contrasts": {},
+  "status": "The primary hypothesis is untested. No complete editable–native pair has been scored on the sealed manuscripts.",
+  "coverage": {
+    "missing_seeds_by_arm": {
+      "editable": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "native": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "uniform": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "handcrafted": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "fork-native": [
+        1
+      ]
+    },
+    "missing_primary_pairs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "missing_token_pairs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "root_missing": true
+  },
   "searches": {}
 }

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 from contextlib import contextmanager
-import os
 import subprocess
 import tempfile
 import time
@@ -233,7 +232,7 @@ def publish(project, label):
             + body
             + "\n\nGitHub source revision "
             + rev
-            + ". The model artifacts are the executable workspaces and selectors in each run archive.\n",
+            + ". This repository mirrors the study sources and verified results. Evolved workspaces are published when a search has a recorded archive.\n",
             encoding="utf-8",
         )
         command(

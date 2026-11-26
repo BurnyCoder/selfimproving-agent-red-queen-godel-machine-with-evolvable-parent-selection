@@ -1,6 +1,171 @@
 {
   "scores": [],
   "contrasts": {},
+  "status": "The primary hypothesis is untested. No complete editable–native pair has been scored on the sealed manuscripts.",
+  "coverage": {
+    "missing_seeds_by_arm": {
+      "editable": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "native": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "uniform": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "handcrafted": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "fork-native": [
+        1
+      ]
+    },
+    "missing_primary_pairs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "missing_token_pairs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "root_missing": true
+  },
+  "development": {
+    "train": {
+      "before": {
+        "accept": {
+          "n": 50,
+          "acknowledgments": 42,
+          "funding_language": 40,
+          "reviewer_thanks": 4,
+          "characters": {
+            "min": 43100,
+            "median": 82621.5,
+            "max": 199795
+          }
+        },
+        "reject": {
+          "n": 50,
+          "acknowledgments": 1,
+          "funding_language": 1,
+          "reviewer_thanks": 0,
+          "characters": {
+            "min": 21309,
+            "median": 48075.5,
+            "max": 125322
+          }
+        }
+      },
+      "after": {
+        "accept": {
+          "n": 50,
+          "acknowledgments": 0,
+          "funding_language": 9,
+          "reviewer_thanks": 0,
+          "characters": {
+            "min": 42867,
+            "median": 82265.5,
+            "max": 199038
+          }
+        },
+        "reject": {
+          "n": 50,
+          "acknowledgments": 0,
+          "funding_language": 1,
+          "reviewer_thanks": 0,
+          "characters": {
+            "min": 21309,
+            "median": 48075.5,
+            "max": 125322
+          }
+        }
+      }
+    },
+    "validation": {
+      "before": {
+        "accept": {
+          "n": 50,
+          "acknowledgments": 41,
+          "funding_language": 33,
+          "reviewer_thanks": 6,
+          "characters": {
+            "min": 34992,
+            "median": 78539.5,
+            "max": 185358
+          }
+        },
+        "reject": {
+          "n": 50,
+          "acknowledgments": 1,
+          "funding_language": 2,
+          "reviewer_thanks": 0,
+          "characters": {
+            "min": 9867,
+            "median": 46568.0,
+            "max": 101321
+          }
+        }
+      },
+      "after": {
+        "accept": {
+          "n": 50,
+          "acknowledgments": 0,
+          "funding_language": 2,
+          "reviewer_thanks": 0,
+          "characters": {
+            "min": 34992,
+            "median": 78277.5,
+            "max": 185023
+          }
+        },
+        "reject": {
+          "n": 50,
+          "acknowledgments": 0,
+          "funding_language": 2,
+          "reviewer_thanks": 0,
+          "characters": {
+            "min": 9867,
+            "median": 46568.0,
+            "max": 101321
+          }
+        }
+      }
+    }
+  },
   "examples": {},
   "runs": []
 }
