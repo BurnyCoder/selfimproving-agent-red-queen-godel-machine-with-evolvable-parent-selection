@@ -1,5 +1,7 @@
 # Research plan
 
+The [independent scientific audit](reviews/independent-scientific-audit.md) and [dated amendment](amendments.md) document the completed model-free work. The registered model experiments remain a separate phase. [Current results](summary.md)
+
 Implement HyperAgents E.5's editable newest-node policy in the October RQGM two-role paper domain. [Source audit](state-of-the-art-review.md) · [Methods and decision criteria](preregistration.md) · [Exact run order](planned-runs.md)
 
 1. Verify the publications, both independent RQGM implementations, the released selector and the data. Publish the initial review, split hashes, registration and README.

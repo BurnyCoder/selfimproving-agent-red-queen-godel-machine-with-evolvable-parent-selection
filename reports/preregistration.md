@@ -1,5 +1,7 @@
 # Prospective registration · 20 November 2026
 
+Historical protocol. The [original registered text and fingerprints](https://github.com/BurnyCoder/selfimproving-agent-red-queen-godel-machine-with-evolvable-parent-selection/tree/545478946244a9452dbeb97b5d70cd730b712da5) and [dated amendments](amendments.md) distinguish the original design from subsequent corrections. The November 26 amendment preserves enrollment and specifies completeness per comparison.
+
 Libor “Burny” Burian. This protocol is registered before local model inference or experimental outcomes. The Git commit on the public main branch provides the time-stamped protocol. See [the split manifest](../results/split-manifest.json), [literature review](literature-review.md), [source audit](state-of-the-art-review.md) and [run matrix](planned-runs.md).
 
 ## Hypothesis and unit of comparison

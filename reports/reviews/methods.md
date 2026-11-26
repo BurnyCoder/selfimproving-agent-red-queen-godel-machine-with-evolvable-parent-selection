@@ -1,5 +1,7 @@
 # Methodological review before inference
 
+This note describes the November 20 protocol. The [independent November 26 audit](independent-scientific-audit.md) reports a measured development-text cue, an invalid-cohort regression, and the amended scoring checks.
+
 **Estimand.** The paired difference measures agreement with historical decisions for this corpus, backbone and search budget. Editors use training feedback from selected ancestors. The evaluator election and specialist selection reuse validation evidence, so validation improvements may reflect selection. Final paired estimates require the sealed cohort. [Registered analysis](../preregistration.md) · [RQGM protocol](https://arxiv.org/html/2606.26294v3#A3.SS7)
 
 **Isolation.** The trusted splitter reads the original labeled public corpus to construct disjoint, fingerprinted splits. The sandbox mounts a Python runtime and receives a JSON argument. The selector sees aggregate validation outcomes and ancestry. The editor sees inherited source and training observations. Model traffic, labels and cache databases live outside its filesystem. Public pretraining familiarity and subtler author/venue cues remain possible. [Reported leakage](https://github.com/facebookresearch/HyperAgents/issues/39)

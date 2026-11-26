@@ -1,5 +1,33 @@
 # Run the paper-review study
 
+## Reproduce the offline audit
+
+The audit needs the pinned uv environment and either the public result files or the source CSV for rebuilding development counts. Training and inference are disabled by the process flag.
+
+~~~powershell
+uv sync --locked
+$env:RQGM_DISABLE_MODEL = '1'
+uv run --locked rqgm-study prepare
+uv run --locked rqgm-study selftest
+uv run --locked rqgm-study audit
+~~~
+
+The cleaner first reconstructs the November 20 enrollment, compares all original fingerprints, and writes amended texts with the same IDs and labels. It reports cue counts and lengths for training and validation only. Ordinary report regeneration also works from the tracked evidence without the private corpus. A fresh host observation can be captured with the audit's `--record-observation` option after writing model-disabled pytest JUnit reports to `.private/audit-study.xml` and `.private/audit-upstream.xml`. This optional observation reads the local ledger in read-only mode. [Independent review](../reports/reviews/independent-scientific-audit.md) · [Results](../results/analysis.json)
+
+The optional audit flag `--verify-sources` re-extracts the attributed external comparisons from the pinned HyperAgents PDF and OpenRQGM result JSON over HTTPS. The default audit uses the archived source receipts. [Published source evidence](../results/published-source-evidence.json)
+
+To repeat the upstream engineering checks on a fresh checkout, place the pinned OpenRQGM repository under the ignored `.private` directory. These five upstream files exercise fixed, deterministic fixtures. The existing public host receipt records the original machine's observations.
+
+~~~powershell
+git clone https://github.com/DreamFallenFlowers/OpenRQGM.git .private/OpenRQGM
+git -C .private/OpenRQGM checkout --detach feecb32d9fbdd1c60749ade9ecb47f971e12666e
+uv run --locked python -m pytest -q tests --junitxml=.private/audit-study.xml
+$upstreamTests = 'archive','engine','scheduler','statistics','toy' | ForEach-Object { ".private/OpenRQGM/tests/test_$_.py" }
+uv run --locked python -m pytest -q $upstreamTests --junitxml=.private/audit-upstream.xml
+~~~
+
+## Run the registered campaign in a separate model-enabled process
+
 Clone the GitHub project and run commands from its root. Install uv, Git, Python 3.12, an NVIDIA driver and Ollama. On Windows install Ubuntu under WSL and its bubblewrap package. A native Linux host uses the same worker protocol. The frozen Ollama manifest digest is checked by the broker. The repository lockfile pins OpenRQGM and Python dependencies. [uv](https://docs.astral.sh/uv/) · [Ollama chat API](https://docs.ollama.com/api/chat) · [bubblewrap](https://github.com/containers/bubblewrap)
 
 ~~~powershell

@@ -1,6 +1,6 @@
 # Run matrix
 
-All arms use frozen local Qwen3.5-4B and the same paper split, anchor, context, evaluator replacement and editor budget. The sole arm-specific intervention is the expansion parent's selection mechanism. [Registration and decision rules](preregistration.md)
+All arms prescribe frozen local Qwen3.5-4B and common splits, anchor, context, replacement rule and validation budget. The editable arm can propose selector edits and execute them. The fixed arms restrict edits to the other roles and use their assigned selector. Actual call and token counts can differ. [Registration](preregistration.md) · [Completeness clarification](amendments.md) · [Editing interface](../src/rqstudy/domain.py)
 
 | Stage | Seeds | Arm | Scheduled validation per run | Endpoint set |
 |---|---|---|---|---|
@@ -11,4 +11,4 @@ All arms use frozen local Qwen3.5-4B and the same paper split, anchor, context, 
 | Midpoint intervention | 1 | Continuation of editable state with native override | Remaining half of common budget | Same 100 |
 | Historical formula replay | All expansions | Released exponential vs paper reciprocal penalty | No model calls | Parent-ID disagreement |
 
-The live dashboard displays training/search validation only. The first search meeting a stopping budget is archived with its endpoint, then independently evaluated on the correct evaluation split. All confirmatory endpoints are jointly frozen before access to test examples. Store a complete audit trail for unsuccessful edits. Generate score tables, plots and trajectory summaries directly from the raw run files.
+The local dashboard updates search validation observations during a run. Published panels also show verified endpoint evaluations. Pilot endpoints use the pilot split. The joint freeze binds all available confirmatory endpoints before test scoring, and records missing configurations. [Campaign](../src/rqstudy/campaign.py) · [Endpoint checks](../src/rqstudy/endpoints.py)
