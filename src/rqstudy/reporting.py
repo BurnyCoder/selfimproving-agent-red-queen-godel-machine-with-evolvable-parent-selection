@@ -622,7 +622,8 @@ Service hours sum Ollama's successful, uncached request durations. They include 
     write(
         reports / "progress.md",
         progress
-        + "\n\n[Run matrix](planned-runs.md) · [Live dashboard](../docs/index.html)",
+        + "\n\nThe independent audit verified the amended manuscript cohorts and the paired analysis using saved inputs and synthetic cases. "
+        "[Dated audit and evidence](reviews/independent-scientific-audit.md) · [Run matrix](planned-runs.md) · [Live dashboard](../docs/index.html)",
     )
     histories = reports / "experiments"
     index = []
@@ -665,7 +666,8 @@ Service hours sum Ollama's successful, uncached request durations. They include 
             "\n".join(lessons)
             or "The printed and released child-count penalties differ. The planned replay compares their choices on identical archive snapshots. [Printed formula](https://arxiv.org/pdf/2603.19461v2#page=24) · [Released weights](https://github.com/facebookresearch/HyperAgents/blob/59a68f672dfb92c74aeb7e61535d776fb36e172d/utils/gl_utils.py#L571-L584)"
         )
-        + "\n\n[Source audit](../state-of-the-art-review.md) · [Interpretation limits](../reviews/methods.md)",
+        + "\n\nThe corpus audit found a class difference in acknowledgments headings on development papers. The amended inputs remove the detected headings, while class differences in manuscript length persist. "
+        "[Development counts and limitations](../reviews/independent-scientific-audit.md) · [Source audit](../state-of-the-art-review.md) · [Interpretation limits](../reviews/methods.md)",
     )
     make_paper(
         project,
