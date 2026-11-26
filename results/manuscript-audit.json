@@ -1,6 +1,7 @@
 {
   "source_sha256": "efa8e77721d6d41c5d9ea69aaab8f0c16664618876e2c9dfe897a3852bb242c9",
-  "cleaner_sha256": "177f4ac1c3c947822b6d8abbc3d0ea9cba608e5fc8b68e26a25aff3fd8fecda1",
+  "manifest_sha256": "ddb7acd1fa1b45ea4413b4aebe88c2ec8b8c07988e14ac5ab820fe847a0ab2a4",
+  "cleaner_sha256": "3e551424a222508182d67dc68714bb8f54184ab62186383817386cd79ac0d6d8",
   "development": {
     "train": {
       "before": {
@@ -31,7 +32,7 @@
         "accept": {
           "n": 50,
           "acknowledgments": 0,
-          "funding_language": 10,
+          "funding_language": 9,
           "reviewer_thanks": 0,
           "characters": {
             "min": 42867,
@@ -109,7 +110,7 @@
       "count": 100,
       "same_ids_order_labels": true,
       "before": "c4c7dd3ed5375adc295c641f20cf981b11bf13f96b4e925eabc6ea5dd1dc3ea3",
-      "after": "80f814928403ccc7652ee47c865e2567a0250744815f8e34d2665b89b11127b8"
+      "after": "99b91a6dddf3bc345910d5a6fa009385be6f89f4a127a8eb732bde41a88aa952"
     },
     "validation": {
       "count": 100,
@@ -121,7 +122,7 @@
       "count": 100,
       "same_ids_order_labels": true,
       "before": "48c273c1a1275346966696106f1d93d69a566ad7a45e17ae176d854b280657a3",
-      "after": "8753b3ebae52434d0c338fb5ba69e51292198dd34942f2fec1e8a3afbe1653e8"
+      "after": "57a0068bec41d9c75cb5b810f926470eee0e5480728dfacf09c8fcc14c14689b"
     },
     "pilot": {
       "count": 24,

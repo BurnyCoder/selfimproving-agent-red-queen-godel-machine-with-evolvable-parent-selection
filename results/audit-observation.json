@@ -1,0 +1,95 @@
+{
+  "date": "2026-11-26",
+  "source_commit": "e8a56baf9c677940781f718af6d7696b7f034b2b",
+  "ledger_counts": {
+    "calls": 0,
+    "memo": 0,
+    "attempts": 0
+  },
+  "preflight_logs": [
+    {
+      "file": "preflight-16384-20261120-060018-428458.log",
+      "sha256": "0aecef8559e0ac9ce62a8a22b9c75819497f7bf4e415dec27ec95acf2b1ef7b1",
+      "synthetic_requests": 1,
+      "completions": 0
+    }
+  ],
+  "tests": {
+    "study": {
+      "tests": 34,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "test_node_and_clade_evidence_differ",
+        "test_latest_selector_and_older_parent_inheritance",
+        "test_failed_owner_falls_back",
+        "test_released_and_published_penalties_can_disagree",
+        "test_strip_outcome_headers_preserve_neighbor_text",
+        "test_sandbox_blocks_private_io",
+        "test_concatenated_mastheads_and_blind_review_titles",
+        "test_failed_worker_uniform_root_and_readonly_snapshot",
+        "test_disclosures_preserve_science",
+        "test_standalone_funding_and_thanks_keep_adjacent_sentences",
+        "test_independent_statistic_and_boundaries",
+        "test_extracted_credit_caption_after_references_preserves_scientific_caption",
+        "test_false_verdict_without_joint_freeze",
+        "test_inconsistent_endpoint_never_yields_an_interval[other_population]",
+        "test_inconsistent_endpoint_never_yields_an_interval[duplicate]",
+        "test_inconsistent_endpoint_never_yields_an_interval[label]",
+        "test_inconsistent_endpoint_never_yields_an_interval[bit]",
+        "test_inconsistent_endpoint_never_yields_an_interval[body]",
+        "test_inconsistent_endpoint_never_yields_an_interval[source]",
+        "test_inconsistent_endpoint_never_yields_an_interval[checkpoint]",
+        "test_inconsistent_endpoint_never_yields_an_interval[budget]",
+        "test_inconsistent_endpoint_never_yields_an_interval[split_sha]",
+        "test_inconsistent_endpoint_never_yields_an_interval[freeze_sha]",
+        "test_inconsistent_endpoint_never_yields_an_interval[chronology]",
+        "test_inconsistent_endpoint_never_yields_an_interval[short]",
+        "test_primary_completeness_is_per_comparison",
+        "test_freeze_and_resume_reject_drift_before_review",
+        "test_scorer_resumes_valid_partial_and_rejects_bad_partial",
+        "test_fork_accounts_shared_prefix_once",
+        "test_offline_guard_precedes_any_backend_access",
+        "test_resume_midpoint_fork_and_erasure",
+        "test_minimum_anchor_and_seal_precede_scoring",
+        "test_crossed_interval_and_stratification",
+        "test_unicode_reading_pass_covers_every_character"
+      ],
+      "junit_sha256": "269af9577a953ba65078d574285703c71eea733c365fb15485fb5669d791b406"
+    },
+    "upstream": {
+      "tests": 21,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        "test_clade_counts_include_descendants_and_respect_erasure",
+        "test_least_measured_selection_balances_role_then_task",
+        "test_checkpoint_promotes_anchor_winner_and_selectively_erases",
+        "test_training_feedback_never_enters_validation_records",
+        "test_checkpoint_does_not_overshoot_validation_boundary",
+        "test_runtime_cannot_mutate_frozen_incumbent",
+        "test_engine_caches_by_sample_artifact_key",
+        "test_multi_slot_replacements_are_planned_from_old_epoch_vector",
+        "test_ucb_air_gate_follows_archive_growth_rule",
+        "test_exponential_checkpoint_schedule",
+        "test_checkpoint_validation_rejects_duplicates_and_budget_edge",
+        "test_best_belief_is_exact_beta_lower_quantile",
+        "test_best_belief_rejects_invalid_inputs",
+        "test_strict_improvement_keeps_numerical_ties",
+        "test_toy_runs_end_to_end_with_real_replacement",
+        "test_state_restores_only_with_same_runtime_contract",
+        "test_interrupted_run_resumes_with_identical_rng_and_checkpoint_trajectory[8]",
+        "test_interrupted_run_resumes_with_identical_rng_and_checkpoint_trajectory[11]",
+        "test_atomic_state_write_preserves_previous_snapshot_on_serialization_error",
+        "test_legacy_state_is_auditable_but_rejected_for_deterministic_resume",
+        "test_workspace_view_excludes_validation_cache_but_keeps_lineage_feedback"
+      ],
+      "junit_sha256": "037e47c66581e44f719b793af380baecfa156a35ebe375ec976ae684a9416462"
+    }
+  },
+  "model_access_disabled": true,
+  "search_files": 0,
+  "endpoint_rows": 0
+}

@@ -1,0 +1,36 @@
+{
+  "hyperagents": {
+    "url": "https://arxiv.org/pdf/2603.19461v2",
+    "page": 60,
+    "sha256": "ad3e7ec49f316e0feb00e9994785b618308e47ea5c3ed53b90cd4642d3af2619",
+    "runs": 5,
+    "reported_p_greater_than": 0.05,
+    "scores": {
+      "fixed uniform": {
+        "score": 0.428,
+        "low": 0.407,
+        "high": 0.432
+      },
+      "editable": {
+        "score": 0.491,
+        "low": 0.387,
+        "high": 0.512
+      },
+      "handcrafted": {
+        "score": 0.532,
+        "low": 0.384,
+        "high": 0.586
+      }
+    }
+  },
+  "openrqgm": {
+    "url": "https://raw.githubusercontent.com/DreamFallenFlowers/OpenRQGM/feecb32d9fbdd1c60749ade9ecb47f971e12666e/docs/results/paper-matched-v5-summary.json",
+    "sha256": "299b5fbab60830255a9b65033ab991d352979c86d2040739e3d0409521295898",
+    "paper_comparison_valid": false,
+    "search": {
+      "validation_outcomes": 12288,
+      "evaluator_replacements": 4,
+      "erased_records": 2182
+    }
+  }
+}
